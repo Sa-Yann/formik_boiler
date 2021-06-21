@@ -1,11 +1,14 @@
 import './YouTubeForm.css';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+// formik is used to connect the Form to React
 import * as Yup from 'yup';
 
 const initialValues = {
     nameInput: 'SaiYann',
     emailInput: '',
-    channelInput: ''
+    channelInput: '',
+    commentsInput: '',
+    adress: ''
 };
 
 const onSubmit =  values => { 
@@ -49,6 +52,7 @@ function YouTubeForm () {
             <div className="form-control">
                 <label htmlFor="name">Name</label>
                 <Field 
+                // Field handle onChange/onBlur and the value inserted in the input
                 // 1- Field linked up inputs to the Formik Component
                 // 2-Field uses the name attribute value to match up with the Formik State
                 // 3- By Default Field renders an input element
@@ -65,6 +69,7 @@ function YouTubeForm () {
                 />
                 <ErrorMessage name="nameInput"/>
                 {/* <ErrorMessage/> takes care of rendering the error message for the particular field it is attached to */}
+                {/* ErrorMessage handle the conditioning of the rendering error only if the input add been visited an dif the error exists */}
                 {/* {formik.touched.nameInput && formik.errors.nameInput ? (<div className="error" >{formik.errors.nameInput}</div>) : null} */}
             </div>   
 
@@ -89,6 +94,38 @@ function YouTubeForm () {
                 />
                 <ErrorMessage name="channelInput"/>
                 {/* {formik.touched.channelInput && formik.errors.channelInput ? (<div className="error" >{formik.errors.channelInput}</div>) : null} */}
+            </div>
+
+            <div className="form-control">
+                <label htmlFor="comments">Your Comments</label>
+                <Field 
+                    as="textarea"
+                    id="comments"
+                    name="commentsInput"
+                />
+            </div>
+
+            <div className="form-control">
+                <label htmlFor="adress">Your Adress</label>
+                <Field 
+                    id="adress"
+                    name="adressInput"
+                >
+                {
+                    (props) => {
+                        // props coming as arguments of the arrow function are used to link the input element render to Formik
+                        console.log('props from: ', props)
+                        const {field, form, meta} = props
+                        return (
+                            <div>
+                                <input type="text" id="adress" {...field}/>
+                                {meta.touched && meta.error ? <div>{meta.error}</div> : null}
+                            </div>
+                        )   
+                    }
+                }
+                </Field>
+                
             </div>
                 
 
