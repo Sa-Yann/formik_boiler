@@ -81,7 +81,11 @@ function YouTubeForm () {
                 id="email" 
                 name="emailInput"
                 />
-                <ErrorMessage name="emailInput"/>
+                <ErrorMessage name="emailInput">
+                    {
+                        (errorMsg) => <div className="error">{errorMsg}</div>   
+                    }
+                </ErrorMessage>
                 {/* {formik.touched.emailInput && formik.errors.emailInput ? (<div className="error" >{formik.errors.emailInput}</div>) : null} */}
             </div>
                 
