@@ -2,6 +2,7 @@ import './YouTubeForm.css';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 // formik is used to connect the Form to React
 import * as Yup from 'yup';
+import TextError from './TextError';
 
 const initialValues = {
     nameInput: 'SaiYann',
@@ -67,7 +68,7 @@ function YouTubeForm () {
                 // Possibility 2 using : {...formik.getFieldProps('nameInput')}
                 // Possibility 3: using : the Field Component
                 />
-                <ErrorMessage name="nameInput"/>
+                <ErrorMessage name="nameInput" component={TextError}/>
                 {/* <ErrorMessage/> takes care of rendering the error message for the particular field it is attached to */}
                 {/* ErrorMessage handle the conditioning of the rendering error only if the input add been visited an dif the error exists */}
                 {/* {formik.touched.nameInput && formik.errors.nameInput ? (<div className="error" >{formik.errors.nameInput}</div>) : null} */}
