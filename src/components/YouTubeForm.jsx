@@ -9,7 +9,11 @@ const initialValues = {
     emailInput: '',
     channelInput: '',
     commentsInput: '',
-    adress: ''
+    adress: '',
+    socialMedia: {
+        facebookInput: '',
+        twitterInput:''
+    }
 };
 
 const onSubmit =  values => { 
@@ -131,6 +135,15 @@ function YouTubeForm () {
                 }
                 </Field>
                 
+            </div>
+
+            <div className="form-control">
+                <label htmlFor="facebook">Facebook</label>
+                <Field type="text" id="facebook" name="socialmedia.facebookInput"/>
+            </div>
+            <div className="form-control">
+                <label htmlFor="twitter">Twitter</label>
+                <Field type="text" id="twitter" name="socialmedia.twitterInput"/>
             </div>
                 
 
