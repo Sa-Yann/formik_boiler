@@ -1,6 +1,127 @@
-.youtubeForm__title {
+label {
+    font-weight: bold;
+    display: flex;
+    margin-bottom: 5px;
+  }
+  
+  input[type="text"], input[type="email"], textarea {
+    display: block;
+    width: 100%;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: whitesmoke;
+    background-image: none;
+    border: 1px solid rgb(196, 24, 24);
+    border-radius: 4px;
+    /* margin-bottom: 20px; */
+  }
+  
+  .form-control {
+    margin-bottom: 20px;
+  }
+  
+  .error {
+    color: red;
+    margin-top: 3px;
+  }
+  
+  .youtubeForm__title {
     color: rgb(0, 140, 255);
     display: flex;
     justify-content: center;
 
 }
+
+.form-controlPhNb {
+    max-width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    /* padding-left: 10px;
+    padding-right: 10px; */
+    padding: 6px 12px;
+  }
+
+  .form-controlPhNb .labelPhNb {
+    color:rgb(3, 3, 3) !important;
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    
+  }
+
+  input[type="number"] {
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: whitesmoke;
+    background-image: none;
+    border: 1px solid rgb(4, 155, 255);
+    border-radius: 4px;
+  }
+
+  .minusButton, .plusButton  {
+    color: white;
+    font-size: large;
+    height: 25px;
+    width: 100px;;
+    border-radius: 5px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    display: flex;
+    /* flex-direction:initial; */
+    align-items: center;
+    justify-content: center;
+    /* align-items: center; */
+  }
+
+  .plusButton {
+    display: flex;
+    background-color: rgb(33, 110, 252);
+  }
+
+  .minusButton {
+    display: flex;
+    background-color: tomato;
+  }
+
+  .buttonsAdd {
+    display: flex;
+    justify-content:space-around;
+    /* align-items: center; */
+  }
+
+  .form-controlArray {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction:column;
+    justify-content: center;
+  }
+
+  .labelFieldArray {
+      display: flex;
+      max-width: 300px;
+      margin: auto;
+      justify-content: center;
+      text-align: center;
+  }
+
+  .socialAdd_container {
+      width: 100%;
+      padding: 6px 12px;
+      /* padding-top: 6px; */
+      border: 1px solid black;
+      border-radius: 4px;
+      margin-top: 15px;
+      margin-bottom: 15px;
+      display: flex;
+      justify-content:center;
+  }
+
+  .minusButton2, .plusButton2  {
+      margin-left: 10px;
+
+  }

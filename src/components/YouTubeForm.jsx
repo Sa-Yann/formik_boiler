@@ -1,5 +1,6 @@
+import React from 'react';
 import './YouTubeForm.css';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, Form, Field, ErrorMessage, FieldArray } from 'formik';
 // formik is used to connect the Form to React
 import * as Yup from 'yup';
 import TextError from './TextError';
@@ -13,19 +14,26 @@ const initialValues = {
     socialMedia: {
         facebookInput: '',
         twitterInput:''
-    }
+    },
+    phoneNbInput: ['',''],
+    extrasInput: ['']
+
 };
 
 const onSubmit =  values => { 
-    console.log("🚀 ~ file: YouTubeForm.jsx ~ line 13 ~ YouTubeForm ~ values", values)
+    console.log("🚀 ~ file: YouTubeForm.jsx ~ line 13 ~ YouTubeForm ~ Form Data", values)
     }
+
+// const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
+
+
 
 
 const validationSchema = Yup.object({
     nameInput: Yup.string().required('Requiered Field Yup'),
     emailInput: Yup.string().email('Invalid Email Format Yup').required('A valide Email is required'),
-    channelInput: Yup.string().required('Existing Channel Required Yup')
-
+    channelInput: Yup.string().required('Existing Channel Required Yup'),
+    // phoneNbInput[1]: Yup.string().matches(phoneRegExp, 'Phone number is not valid')
 })
 
 function YouTubeForm () {
@@ -123,8 +131,9 @@ function YouTubeForm () {
                 {
                     (props) => {
                         // props coming as arguments of the arrow function are used to link the input element render to Formik
-                        console.log('props from: ', props)
-                        const {field, form, meta} = props
+                        // console.log('props from: ', props)
+                        // const {field, form, meta} = props
+                        const {field, meta} = props
                         return (
                             <div>
                                 <input type="text" id="adress" {...field}/>
@@ -145,8 +154,142 @@ function YouTubeForm () {
                 <label htmlFor="twitter">Twitter</label>
                 <Field type="text" id="twitter" name="socialmedia.twitterInput"/>
             </div>
-                
 
+
+            <div className="form-controlPhNb">
+                <div className="form__primaryPhNb">
+                    <label htmlFor="primaryPhNb" className="labelPhNb">Fix Number</label>
+                    <Field 
+                    type="number"
+                    id="primaryPhNb"
+                    name="phoneNbInput[0]"
+                    />
+                    <ErrorMessage name="phoneNbInput[0]"/>
+                </div>
+                <div className="form__secondaryPhNb">
+                    <label htmlFor="secondaryPhNb" className="labelPhNb">Mobile phone</label>
+                    <Field 
+                    type="number"
+                    id="secondaryPhNb"
+                    name="phoneNbInput[1]"
+                    />
+                    <ErrorMessage name="phoneNbInput[1]"/>
+                </div>
+            </div>
+
+            {/* <div className="form-control">
+                <label className="labelFieldArray" htmlFor="">Add a social network you're reachable on</label>
+                <FieldArray   name="extrasInput">
+                    {
+                        fieldArrayProps => {
+                            // console.log("🚀 ~ file: YouTubeForm.jsx ~ line 183 ~ YouTubeForm ~ fieldArrayProps", fieldArrayProps)
+                            const { form , push, remove} = fieldArrayProps
+                            const {values} = form
+                            const {extrasInput} =  values
+                            // console.log("🚀 ~ file: YouTubeForm.jsx ~ line 187 ~ YouTubeForm ~ extrasInput", extrasInput)
+                            return (
+                                <div className="socialAdd_container"> 
+                                {
+                                    extrasInput.map((item, index) => (
+                                        <div key={index}>
+                                            <div className="buttonsAdd">
+                                            <button className="plusButton" type="button" onClick={() => push('')}> + Add</button>
+                                            {
+                                                index > 0 && (
+                                                    <button type="button" className="minusButton" onClick={() => remove(index)}> - Remove</button>
+                                                )
+                                            }
+                                            </div>
+                                            <Field  type="text" name={`extrasInput[${index}]`}/>  
+                                        </div>
+                                ))
+                                }           
+                                </div>
+                            )
+                        }
+                    }
+                </FieldArray>
+            </div> */}
+
+            <div className="form-controlArray">
+                <label className="labelFieldArray">Click the Icon and Add a Social Network you want us to follow</label>
+                <FieldArray name="extrasInput">
+                    {
+                        fieldArrayProps => {
+                        console.log("🚀 ~ file: YouTubeForm.jsx ~ line 218 ~ YouTubeForm ~ fieldArrayProps", fieldArrayProps)  
+                        const { form, push , remove} = fieldArrayProps
+                        const {values} = form
+                        const {extrasInput} = values
+                        console.log("🚀 ~ file: YouTubeForm.jsx ~ line 223 ~ YouTubeForm ~ extrasInput", extrasInput)
+
+                            return (
+                                <div className="socialAdd__MainContainer">
+                                    {
+                                        extrasInput.map((item, index) => (
+                                            <div key={index}>
+                                                {
+                                                    
+                                                        <div className="socialAdd_container">
+                                                            <Field  name={`extrasInput[${index}]`}/>
+                                                            <button className="minusButton2" type="button" onClick={() => push('')}> [ + ] add New Ntwrk</button>
+                                                            {
+                                                                index && (
+                                                                    <button className="plusButton2" type="button" onClick={()=> remove(index)}>[ - ] rmv This Ntwrk</button>
+                                                                )
+                                                            }
+                                                        </div>
+                                                    
+                                                    // extrasInput.lenght >= 2  ? (
+                                                    //     <div className="socialAdd_container">
+                                                    //         <Field  name={`extrasInput[${index}]`}/>
+                                                    //         <button className="minusButton2" type="button" onClick={() => push('')}> [ + ] add Ntwrk</button>
+                                                    //         {
+                                                    //             index && (
+                                                    //                 <button className="plusButton2" type="button" onClick={()=> remove(index)}>[ - ] rmv Ntwrk</button>
+                                                    //             )
+                                                    //         }
+                                                            
+                                                    //     </div>
+                                                    // ) : (
+                                                    //     <div className="socialAdd_container">
+                                                    //         <Field  name={`extrasInput[${index}]`}/>
+                                                    //         <button className="minusButton2" type="button" onClick={() => push('')}> [ + ] add Ntwrk</button>
+                                                    //         {
+                                                    //             index && (
+                                                    //                 <button className="plusButton2" type="button" onClick={()=> remove(index)}>[ - ] rmv Ntwrk</button>
+                                                    //             )
+                                                    //         }
+                                                    //     </div>
+                                                    // )
+                                                    // index === null ? (
+                                                    //     <div>
+                                                    //     <   Field  name={`extrasInput[${index}]`}/>
+                                                    //     <   button className="minusButton2" type="button" onClick={() => push('')}> [ + ] add  Another Ntwrk</button>
+                                                    //     </div>
+                                                    
+                                                    // ) : (
+                                                    //     <div>
+                                                    //         <Field  name={`extrasInput[${index}]`}/>
+                                                    //         <button className="minusButton2" type="button" onClick={() => push('')}> [ + ] add Another Ntwrk</button>
+                                                    //         <button className="plusButton2" type="button" onClick={()=> remove(index)}>[ - ] rmv This Ntwrk</button>
+                                                    //     </div>
+                                                    // )
+                                                }
+
+
+
+                                                
+                                            </div>
+                                            
+                                        ))
+                                    }
+                                </div>
+                            )
+                        }
+                    }
+                </FieldArray>
+            </div>
+           
             <button type="submit">Submit</button>
             </Form>
             
