@@ -128,7 +128,7 @@ function YouTubeForm () {
                                 id="channel" 
                                 name="channelInput"         
                                 />
-                                <ErrorMessage name="channelInput"/>
+                                <ErrorMessage name="channelInput" component={TextError}/>
                                 {/* {formik.touched.channelInput && formik.errors.channelInput ? (<div className="error" >{formik.errors.channelInput}</div>) : null} */}
                             </div>
                                 
@@ -228,48 +228,8 @@ function YouTubeForm () {
                                                                                 )}
                                                                         </div>
 
-                                                                    // extrasInput.lenght >= 2  ? (
-                                                                    //     <div className="socialAdd_container">
-                                                                    //         <Field  name={`extrasInput[${index}]`}/>
-                                                                    //         <button className="minusButton2" type="button" onClick={() => push('')}> [ + ] add Ntwrk</button>
-                                                                    //         {
-                                                                    //             index && (
-                                                                    //                 <button className="plusButton2" type="button" onClick={()=> remove(index)}>[ - ] rmv Ntwrk</button>
-                                                                    //             )
-                                                                    //         }
-                                                                            
-                                                                    //     </div>
-                                                                    // ) : (
-                                                                    //     <div className="socialAdd_container">
-                                                                    //         <Field  name={`extrasInput[${index}]`}/>
-                                                                    //         <button className="minusButton2" type="button" onClick={() => push('')}> [ + ] add Ntwrk</button>
-                                                                    //         {
-                                                                    //             index && (
-                                                                    //                 <button className="plusButton2" type="button" onClick={()=> remove(index)}>[ - ] rmv Ntwrk</button>
-                                                                    //             )
-                                                                    //         }
-                                                                    //     </div>
-                                                                    // )
-                                                                    // index === null ? (
-                                                                    //     <div>
-                                                                    //     <   Field  name={`extrasInput[${index}]`}/>
-                                                                    //     <   button className="minusButton2" type="button" onClick={() => push('')}> [ + ] add  Another Ntwrk</button>
-                                                                    //     </div>
-                                                                            
-                                                                    // ) : (
-                                                                    //     <div>
-                                                                    //         <Field  name={`extrasInput[${index}]`}/>
-                                                                    //         <button className="minusButton2" type="button" onClick={() => push('')}> [ + ] add Another Ntwrk</button>
-                                                                    //         <button className="plusButton2" type="button" onClick={()=> remove(index)}>[ - ] rmv This Ntwrk</button>
-                                                                    //     </div>
-                                                                    // )
-                                                                }
-
-                                                            
-                                                            
-
+                                                                }                                                     
                                                             </div>
-
                                                         ))
                                                     }
                                                 </div>
@@ -278,7 +238,23 @@ function YouTubeForm () {
                                     }
                                 </FieldArray>
                             </div>
-                                
+                            <button type="button" onClick={() => formik.validateField('commentsInput')}>Validate Comments</button>
+                            <button type="button" onClick={() => formik.validateForm()}>Validate all</button>
+                            <button type="button" onClick={() => formik.setFieldTouched('commentsInput')}>Visit Comments</button>
+                            <button 
+                                type="button" 
+                                onClick={() => formik.setTouched(
+                                    // Need to specify the fields/input we have implemanted errors 
+                                    {
+                                        nameInput:true,
+                                        emailInput: true,
+                                        channelInput: true,
+                                        commentsInput: true
+                                    }
+                                )}
+                            >
+                                Check all Fileds Validation Errors
+                            </button>
                             <button type="submit">Submit</button>
                         </Form>
 
