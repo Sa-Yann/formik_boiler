@@ -1,7 +1,7 @@
 import React from 'react'
 
 function TextError(props) {
-console.log("🚀 ~ file: TextError.jsx ~ line 4 ~ TextError ~ props", props)
+// console.log("🚀 ~ file: TextError.jsx ~ line 4 ~ TextError ~ props", props)
 // props ets la valeur de name="value" inserted" inserée definie dans le error msg
     return (
         <div className="error">
