@@ -64,6 +64,8 @@ function V1_YouTubeForm () {
                 id="name" 
                 name="nameInput"
                 onBlur={formik.handleBlur}
+                // the onBlur function from Formik allows Formik to keep track of the visited field and store the information inserted in the formik.touched.nameOfTheInputKey
+                // that s the way we can display error messages only on visited field and not all visited field after only one had beed visited
                 onChange={formik.handleChange}
                 value={formik.values.nameInput}
                 />

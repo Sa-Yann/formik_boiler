@@ -6,7 +6,7 @@ import * as Yup from 'yup';
 import TextError from './TextError';
 
 const initialValues = {
-    nameInput: 'SaiYann',
+    nameInput: '',
     emailInput: '',
     channelInput: '',
     commentsInput: '',
@@ -31,10 +31,19 @@ const onSubmit =  values => {
 
 const validationSchema = Yup.object({
     nameInput: Yup.string().required('Requiered Field Yup'),
-    emailInput: Yup.string().email('Invalid Email Format Yup').required('A valide Email is required'),
+    emailInput: Yup.string().email('Invalid Email Format Yup').required('A valide Email is required Yup'),
     channelInput: Yup.string().required('Existing Channel Required Yup'),
     // phoneNbInput[1]: Yup.string().matches(phoneRegExp, 'Phone number is not valid')
 })
+const validateComments = value => {
+    // this function gets the value of teh field where the function is Set Up and return the erro message if there s no value
+    // NB: after submiting if using the validateOnChange & validateOnBlur methode / Directly if not
+    let error 
+    if(!value) {
+        error= `Are You Sure You don't Want to Leave a Comment?`
+    }
+    return error
+}
 
 function YouTubeForm () {
 
@@ -56,6 +65,11 @@ function YouTubeForm () {
             initialValues={initialValues}
             validationSchema={validationSchema}
             onSubmit={onSubmit}
+            // to avoid to have the form.errors props fron the Form Component from Formik not populated 
+            // with our previously yup error messages before Submit we use and set 
+            // the validateOnChange and validateOnBlur methode from The Form Component
+            validateOnChange={false}
+            validateOnBlur={false}
             >
             
             <Form>
@@ -95,7 +109,8 @@ function YouTubeForm () {
                 />
                 <ErrorMessage name="emailInput">
                     {
-                        (errorMsg) => <div className="error">{errorMsg}</div>   
+                        (errorMsg) => <div className="error">{errorMsg}</div>
+                        // errorMsg prend la valeur emailInput definie dans la const validationSchema     
                     }
                 </ErrorMessage>
                 {/* {formik.touched.emailInput && formik.errors.emailInput ? (<div className="error" >{formik.errors.emailInput}</div>) : null} */}
@@ -119,7 +134,10 @@ function YouTubeForm () {
                     as="textarea"
                     id="comments"
                     name="commentsInput"
+                    // we assign teh function validateComments to teh validate prop of the Field Component
+                    validate={validateComments}
                 />
+                <ErrorMessage name="commentsInput" component={TextError}/>
             </div>
 
             <div className="form-control">
@@ -177,50 +195,17 @@ function YouTubeForm () {
                 </div>
             </div>
 
-            {/* <div className="form-control">
-                <label className="labelFieldArray" htmlFor="">Add a social network you're reachable on</label>
-                <FieldArray   name="extrasInput">
-                    {
-                        fieldArrayProps => {
-                            // console.log("🚀 ~ file: YouTubeForm.jsx ~ line 183 ~ YouTubeForm ~ fieldArrayProps", fieldArrayProps)
-                            const { form , push, remove} = fieldArrayProps
-                            const {values} = form
-                            const {extrasInput} =  values
-                            // console.log("🚀 ~ file: YouTubeForm.jsx ~ line 187 ~ YouTubeForm ~ extrasInput", extrasInput)
-                            return (
-                                <div className="socialAdd_container"> 
-                                {
-                                    extrasInput.map((item, index) => (
-                                        <div key={index}>
-                                            <div className="buttonsAdd">
-                                            <button className="plusButton" type="button" onClick={() => push('')}> + Add</button>
-                                            {
-                                                index > 0 && (
-                                                    <button type="button" className="minusButton" onClick={() => remove(index)}> - Remove</button>
-                                                )
-                                            }
-                                            </div>
-                                            <Field  type="text" name={`extrasInput[${index}]`}/>  
-                                        </div>
-                                ))
-                                }           
-                                </div>
-                            )
-                        }
-                    }
-                </FieldArray>
-            </div> */}
-
             <div className="form-controlArray">
                 <label className="labelFieldArray">Click the Icon and Add a Social Network you want us to follow</label>
                 <FieldArray name="extrasInput">
                     {
                         fieldArrayProps => {
-                        console.log("🚀 ~ file: YouTubeForm.jsx ~ line 218 ~ YouTubeForm ~ fieldArrayProps", fieldArrayProps)  
+                        // console.log("🚀 ~ file: YouTubeForm.jsx ~ line 218 ~ YouTubeForm ~ fieldArrayProps", fieldArrayProps)  
                         const { form, push , remove} = fieldArrayProps
                         const {values} = form
                         const {extrasInput} = values
-                        console.log("🚀 ~ file: YouTubeForm.jsx ~ line 223 ~ YouTubeForm ~ extrasInput", extrasInput)
+                        console.log(`form Errors: `, form.errors)
+                        // console.log("🚀 ~ file: YouTubeForm.jsx ~ line 223 ~ YouTubeForm ~ extrasInput", extrasInput)
 
                             return (
                                 <div className="socialAdd__MainContainer">
@@ -231,12 +216,12 @@ function YouTubeForm () {
                                                     
                                                         <div className="socialAdd_container">
                                                             <Field  name={`extrasInput[${index}]`}/>
+                                                            {/* By clicking the add field button we push an empty value into the array which generate a new field index which generate a new Field input on the Front end */}
                                                             <button className="minusButton2" type="button" onClick={() => push('')}> [ + ] add New Ntwrk</button>
-                                                            {
-                                                                index && (
+                                                            {index && (
+                                                                    // By clicking the remove field button we use the remove methode from the props to remove the index from the related input out of the extrasNetwork array which make the Field disapear on Front End 
                                                                     <button className="plusButton2" type="button" onClick={()=> remove(index)}>[ - ] rmv This Ntwrk</button>
-                                                                )
-                                                            }
+                                                                )}
                                                         </div>
                                                     
                                                     // extrasInput.lenght >= 2  ? (
