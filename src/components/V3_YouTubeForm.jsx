@@ -5,11 +5,14 @@ import { Formik, Form, Field, ErrorMessage, FieldArray } from 'formik';
 import * as Yup from 'yup';
 import TextError from './TextError';
 import Emoji from 'a11y-react-emoji';
+import FormikControl from './formComponent/FormikControl';
 // emoji list: https://unicode.org/emoji/charts/full-emoji-list.html
 
 
 
 const initialValues = {
+    emailFormikControlInput: 'test',
+    textAreaFormikControlInput: 'Description test',
     nameInput: '',
     emailInput: '',
     channelInput: '',
@@ -109,6 +112,19 @@ function YouTubeForm () {
                         <Form>
 
                             <h2 className="youtubeForm__title">Let me Get to Know a bit about You</h2>
+                            <FormikControl
+                                controlProps="inputControl"
+                                type="email"
+                                label="Your Email Please"
+                                name="emailFormikControlInput"
+                            />
+                            <FormikControl 
+                                controlProps="textAreaControl"
+                                label="Describe the Purpose of your Coming in my Zone"
+                                name="textAreaFormikControlInput"
+                            />
+
+                            
                                 {/* The Form Component automaticaly handle the : onSubmit={formik.handleSubmit}  event*/}
                             {/* <form onSubmit={formik.handleSubmit}> */}
                             <div className="form-control">
