@@ -28,7 +28,7 @@ label {
   }
   
   .youtubeForm__title {
-    color: rgb(0, 140, 255);
+    color: tomato;
     display: flex;
     justify-content: center;
 
@@ -125,4 +125,84 @@ label {
   .minusButton2, .plusButton2  {
       margin-left: 10px;
 
+  }
+
+  .form__SubmitContainer {
+    display: flex;
+    justify-content: center;
+    
+  }
+
+  .form__Submit {
+    margin: 15px;
+    height: 3em;
+    width: 10em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 14px;
+    font-weight: 700;
+    background-color: tomato;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  button[disabled]{
+    border: 1px solid #999999;
+    background-color: #cccccc;
+    color: #666666;
+    margin: 15px;
+    height: 3em;
+    width: 10em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 700;
+    border-radius: 8px;
+  }
+
+  .form__starRequired {
+    color: red;
+  }
+
+  .from__SubmittedOrNot {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    height: 3em;
+    width: 10em;
+  }
+
+  .form__SubmitMeMoji {
+    margin: 15px;
+    height: 3em;
+    width: 10em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: tomato;
+    border: 1px solid #999999;
+    font-size: 14px;
+    font-weight: 700;
+    background-color: white;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  .form__Reset {
+    margin: 15px;
+    height: 3em;
+    width: 10em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: tomato;
+    border: 1px solid #999999;
+    font-size: 14px;
+    font-weight: 700;
+    background-color: rgb(4, 94, 34);
+    border-radius: 8px;
+    cursor: pointer;
   }
