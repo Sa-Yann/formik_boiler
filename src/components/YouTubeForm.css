@@ -206,3 +206,14 @@ label {
     border-radius: 8px;
     cursor: pointer;
   }
+
+  .radioField {
+    display: flex;
+    color: red;
+    background-color: rgb(4, 94, 34);
+  }
+
+  .checkBoxOptions {
+    display: flex;
+    color: red;
+  }

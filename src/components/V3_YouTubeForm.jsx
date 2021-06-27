@@ -9,10 +9,24 @@ import FormikControl from './formComponent/FormikControl';
 // emoji list: https://unicode.org/emoji/charts/full-emoji-list.html
 
 
+// const optionsToSelect = [
+//     { key: 'Mr/Mme/None' , value: 'Mr,Mme or None'},
+//     { key: 'Male', value: 'Mr'},
+//     { key: 'Female', value: 'Mme' },
+//     { key: 'No Gender', value: 'No Gender' },
+// ]
+
+const radioOptions = [
+    {key: 'Option 1', value: 'rOption1'},
+    {key: 'Option 2', value: 'rOption2'},
+    {key: 'Option 3', value: 'rOption3'}
+]
 
 const initialValues = {
     emailFormikControlInput: 'test',
     textAreaFormikControlInput: 'Description test',
+    selectOption: '',
+    radioOption: '',
     nameInput: '',
     emailInput: '',
     channelInput: '',
@@ -26,6 +40,7 @@ const initialValues = {
     extrasInput: ['']
 
 };
+
 
 const savedDatas = {
     nameInput: 'Yann Leblond',
@@ -60,7 +75,12 @@ const validationSchema = Yup.object({
     emailInput: Yup.string().email('Invalid Email Format Yup').required('A valide Email is required Yup'),
     channelInput: Yup.string().required('Existing Channel Required Yup'),
     // phoneNbInput[1]: Yup.string().matches(phoneRegExp, 'Phone number is not valid')
+    emailFormikControlInput: Yup.string().required('Required'),
+    textAreaFormikControlInput: Yup.string().required('Required'),
+    selectOption: Yup.string().required('Required'),
+    radioOptions: Yup.string().required('Required Please Make a Choice')
 })
+
 const validateComments = value => {
     // this function gets the value of teh field where the function is Set Up and return the erro message if there s no value
     // NB: after submiting if using the validateOnChange & validateOnBlur methode / Directly if not
@@ -107,7 +127,7 @@ function YouTubeForm () {
                 the fuuction takes props and retrun jsx which in our case is the Form Component*/}
             {   //formikProps is the name that we giove to the Formik component props 
                 formikProps => {
-                // console.log("🚀 ~ file: V3_YouTubeForm .jsx ~ line 76 ~ YouTubeForm ~ formik", formikProps)
+                console.log("🚀 ~ file: V3_YouTubeForm .jsx ~ line 76 ~ YouTubeForm ~ formik", formikProps)
                     return (
                         <Form>
 
@@ -123,6 +143,19 @@ function YouTubeForm () {
                                 label="Describe the Purpose of your Coming in my Zone"
                                 name="textAreaFormikControlInput"
                             />
+                            {/* <FormikControl
+                                controlProps="selectControl"
+                                label="Gender"
+                                name="selectOption"
+                                selectOption={optionsToSelect}
+                            /> */}
+                            <FormikControl 
+                                controlProps="radioControl"
+                                label="Radio topic"
+                                name="radioOption"
+                                options={radioOptions}
+                            />
+
 
                             
                                 {/* The Form Component automaticaly handle the : onSubmit={formik.handleSubmit}  event*/}
