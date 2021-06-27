@@ -10,6 +10,7 @@ function SelectComponent(selectAllProps) {
             <label htmlFor={name}>{label}</label>
             <Field as="select" id={name} name={name} {...rest}>
                 {
+                    // NEED TO FIX THE MAP BUG
                     options.map( option => {
                         return (
                             <option key={option.value} value={option.value}>

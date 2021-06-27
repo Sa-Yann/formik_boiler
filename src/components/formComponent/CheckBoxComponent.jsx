@@ -12,6 +12,7 @@ function CheckBoxComponent(checkBoxAllProps) {
             <Field name={name} {...rest}  style={{display:'flex'}}>
                 {
                     ({field}) => {
+                        // NEED TO FIX THE HINCULDE BUG
                         // console.log("🚀 ~ file: RadioButtComponent.jsx ~ line 13 ~ RadioButtComponent ~ field", field)
                        return options.map( option => {
                             return (
